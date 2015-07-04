@@ -10,7 +10,9 @@ import java.util.List;
 
 import org.tribot.api.Timing;
 
-import scripts.api.scriptapi.paint.generic.OpenButton;
+import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
+import scripts.api.scriptapi.paint.paintables.ExperienceDisplay;
+import scripts.api.scriptapi.paint.paintables.generic.OpenButton;
 
 public abstract class Paintable<T> {
 

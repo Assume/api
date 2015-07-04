@@ -1,9 +1,11 @@
-package scripts.api.scriptapi.paint;
+package scripts.api.scriptapi.paint.paintables;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
 import org.tribot.api2007.types.RSGroundItem;
+
+import scripts.api.scriptapi.paint.Paintable;
 
 public class LootItemDisplay extends Paintable<RSGroundItem> {
 

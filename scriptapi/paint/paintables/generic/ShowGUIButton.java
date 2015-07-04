@@ -1,7 +1,7 @@
-package scripts.api.scriptapi.paint.generic;
+package scripts.api.scriptapi.paint.paintables.generic;
 
-import scripts.api.scriptapi.paint.ButtonDisplay;
 import scripts.api.scriptapi.paint.CGUI;
+import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 
 public class ShowGUIButton extends ButtonDisplay {
 

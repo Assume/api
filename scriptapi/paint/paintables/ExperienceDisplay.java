@@ -1,9 +1,12 @@
-package scripts.api.scriptapi.paint;
+package scripts.api.scriptapi.paint.paintables;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import scripts.api.scriptapi.paint.Paintable;
+import scripts.api.scriptapi.paint.SkillData;
 
 public class ExperienceDisplay extends Paintable<Integer> {
 

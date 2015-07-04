@@ -1,9 +1,11 @@
-package scripts.api.scriptapi.paint;
+package scripts.api.scriptapi.paint.paintables;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import scripts.api.scriptapi.paint.Paintable;
 
 public class DataDisplay extends Paintable<String[]> {
 
