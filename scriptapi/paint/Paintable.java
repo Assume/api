@@ -16,6 +16,14 @@ import scripts.api.scriptapi.paint.paintables.generic.OpenButton;
 
 public abstract class Paintable<T> {
 
+	private static final List<Paintable<?>> PAINTABLES = new ArrayList<Paintable<?>>();
+
+	private static boolean hide_all_elements = false;
+
+	public static final void add(Paintable<?> paintable) {
+		PAINTABLES.add(paintable);
+	}
+
 	protected final static Color DARK_GREY = new Color(0, 0, 0, 175);
 	protected final static Color VERY_LIGHT_GREY = new Color(
 			Color.BLACK.getRed(), Color.BLACK.getGreen(),
@@ -25,10 +33,6 @@ public abstract class Paintable<T> {
 
 	protected final static Font ARIAL_SIZE_ELEVEN = new Font("Arial", 0, 11);
 	protected final static Font ARIAL_SIZE_NINE = new Font("Arial", 0, 9);
-
-	private static final List<Paintable<?>> PAINTABLES = new ArrayList<Paintable<?>>();
-
-	private static boolean hide_all_elements = false;
 
 	private T t;
 	private boolean isOpen;
@@ -54,7 +58,6 @@ public abstract class Paintable<T> {
 		if (!(this instanceof OpenButton))
 			this.open_button = new OpenButton(x, y, this);
 		this.last_state_change = System.currentTimeMillis();
-		PAINTABLES.add(this);
 	}
 
 	/*

@@ -24,6 +24,10 @@ public class ExamplePaintHandler extends PaintHandler {
 		this.show_gui_button = new ShowGUIButton(gui);
 		this.generic_data_display = new DataDisplay();
 
+		Paintable.add(this.experience_display);
+		Paintable.add(this.show_gui_button);
+		Paintable.add(generic_data_display);
+
 	}
 
 	private String[] getGenericDataDisplay(long run_time) {
