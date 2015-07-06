@@ -33,9 +33,6 @@ public abstract class ButtonDisplay extends Paintable<String> {
 		g.drawString(super.get(), x + getAddition(width), y + 10);
 	}
 
-	@Override
-	protected abstract void onClick();
-
 	private int getAddition(int total_length) {
 		if (total_length < 20)
 			return 3;

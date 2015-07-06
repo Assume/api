@@ -30,7 +30,7 @@ public class ExperienceDisplay extends Paintable<Integer> {
 				g.fillRect(super.x, y, 242, 13);
 
 				// Progress
-				g.setColor(VERY_LIGHT_GREY);
+				g.setColor(DARK_GREY);
 				g.fillRect(super.x, y,
 						skill.getPercentToNextLevel() * 242 / 100, 13);
 
@@ -81,6 +81,13 @@ public class ExperienceDisplay extends Paintable<Integer> {
 		}
 		return (hours + ":" + minutes + ":" + seconds);
 	}
+	
+	
+	@Override
+	protected void onClick() {
+		this.setOpen(false);
+		this.open_button.setOpen(true);
+	}
 
 	@Override
 	protected boolean isInClick(Point p) {
@@ -91,7 +98,6 @@ public class ExperienceDisplay extends Paintable<Integer> {
 		int height = 16 * data.length;
 		Rectangle rec = new Rectangle(x, (y + 13) - height, 242, height);
 		return rec.contains(p);
-		// return p.x >= 8 && p.x <= 250 && p.y <= 333 && p.y >= (333 - height);
 	}
 
 }

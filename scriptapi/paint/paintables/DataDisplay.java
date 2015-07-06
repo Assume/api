@@ -29,7 +29,7 @@ public class DataDisplay extends Paintable<String[]> {
 		g.setFont(ARIAL_SIZE_ELEVEN);
 		int c = 0;
 		for (String s : super.get()) {
-			g.setColor(new Color(255, 255, 255, 150));
+			g.setColor(VERY_LIGHT_GREY);
 			int length = super.getStringPixelLength(s, g);
 			g.fillRect(x + 5, (y + 5) + (17 * c), length + 20, 14);
 			g.setColor(Color.BLACK);
@@ -38,6 +38,13 @@ public class DataDisplay extends Paintable<String[]> {
 			c++;
 		}
 
+	}
+
+	@Override
+	protected void onClick() {
+		System.out.println("On click being called for data display");
+		this.setOpen(false);
+		this.open_button.setOpen(true);
 	}
 
 	@Override

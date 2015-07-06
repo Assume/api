@@ -11,23 +11,29 @@ import java.util.List;
 import org.tribot.api.Timing;
 
 import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
-import scripts.api.scriptapi.paint.paintables.ExperienceDisplay;
 import scripts.api.scriptapi.paint.paintables.generic.OpenButton;
 
 public abstract class Paintable<T> {
 
 	private static final List<Paintable<?>> PAINTABLES = new ArrayList<Paintable<?>>();
 
-	private static boolean hide_all_elements = false;
+	private static boolean collapse_all = false;
 
-	public static final void add(Paintable<?> paintable) {
-		PAINTABLES.add(paintable);
+	public static boolean allElementsCollapsed() {
+		return collapse_all;
+	}
+
+	/*
+	 * Sets the value of hide_all_elements to the value of what
+	 * 
+	 * @param what true if to show all elements, false otherwise
+	 */
+	public static void setHideAllElements(boolean what) {
+		collapse_all = what;
 	}
 
 	protected final static Color DARK_GREY = new Color(0, 0, 0, 175);
-	protected final static Color VERY_LIGHT_GREY = new Color(
-			Color.BLACK.getRed(), Color.BLACK.getGreen(),
-			Color.BLACK.getBlue(), 125);
+	protected final static Color VERY_LIGHT_GREY = new Color(255, 255, 255, 150);
 	protected final static Color TRANSPARENT_GREY = new Color(155, 155, 155,
 			110);
 
@@ -35,8 +41,9 @@ public abstract class Paintable<T> {
 	protected final static Font ARIAL_SIZE_NINE = new Font("Arial", 0, 9);
 
 	private T t;
-	private boolean isOpen;
-	private boolean can_hide;
+
+	private boolean is_open;
+	private boolean collapseable;
 
 	protected int x;
 	protected int y;
@@ -49,16 +56,31 @@ public abstract class Paintable<T> {
 		this(t, x, y, true);
 	}
 
-	public Paintable(T t, int x, int y, boolean can_hide) {
+	public Paintable(T t, int x, int y, boolean collapseable) {
 		this.t = t;
-		this.isOpen = true;
-		this.can_hide = can_hide;
+		this.is_open = true;
+		this.collapseable = collapseable;
 		this.x = x;
 		this.y = y;
-		if (!(this instanceof OpenButton))
+		if (!(this instanceof OpenButton)) {
 			this.open_button = new OpenButton(x, y, this);
-		this.last_state_change = System.currentTimeMillis();
+			this.open_button.register();
+		}
+		this.last_state_change = System.currentTimeMillis() - 5000;
 	}
+
+	public void register() {
+		PAINTABLES.add(this);
+	}
+
+	/*
+	 * Removes self from the list of Paintables
+	 */
+	public void remove() {
+		PAINTABLES.remove(this);
+	}
+
+	protected abstract void onClick();
 
 	/*
 	 * Draws the Paintable object
@@ -69,11 +91,6 @@ public abstract class Paintable<T> {
 	 * Generic onClick method for all Paintables, anything extending {@link
 	 * scripts.api.scriptapi.paint.ButtonDisplay} must override this
 	 */
-	protected void onClick() {
-		if (Timing.timeFromMark(last_state_change) > 100 && can_hide) {
-			setOpen(false);
-		}
-	}
 
 	protected abstract boolean isInClick(Point p);
 
@@ -85,11 +102,8 @@ public abstract class Paintable<T> {
 	 * @param time run time of the script
 	 */
 	protected void drawCollapsedButton(Graphics g, long time) {
-		if ((this instanceof OpenButton || x == -1 || y == -1)
-				&& (!(this instanceof ExperienceDisplay)))
+		if ((this instanceof OpenButton || x == -1 || y == -1))
 			return;
-		if (!this.open_button.isOpen())
-			this.open_button.setOpen(true);
 		this.open_button.draw(g, time);
 	}
 
@@ -111,7 +125,7 @@ public abstract class Paintable<T> {
 	 * @return true if open, false otherwise
 	 */
 	public boolean isOpen() {
-		return this.isOpen;
+		return this.is_open;
 	}
 
 	/*
@@ -119,45 +133,27 @@ public abstract class Paintable<T> {
 	 * otherwise
 	 */
 	public void setOpen(boolean what) {
-		this.isOpen = what;
+		if (Timing.timeFromMark(last_state_change) < 500)
+			return;
+		this.is_open = what;
 		this.last_state_change = System.currentTimeMillis();
 	}
 
-	/*
-	 * Removes self from the list of Paintables
-	 */
-	public void remove() {
-		PAINTABLES.remove(this);
-	}
-
 	public static void drawAll(Graphics g, long time) {
-		for (Paintable<?> x : PAINTABLES) {
-			if (!hide_all_elements) {
-				if (x.isOpen)
+		if (allElementsCollapsed()) {
+			for (Paintable<?> x : PAINTABLES)
+				if (!x.collapseable && x.isOpen())
 					x.draw(g, time);
-				else
-					x.drawCollapsedButton(g, time);
-			} else {
-				if (!x.can_hide)
-					if (x.isOpen)
-						x.draw(g, time);
-					else
-						x.drawCollapsedButton(g, time);
+		} else {
+			for (Paintable<?> x : PAINTABLES) {
+				if (x.isOpen())
+					x.draw(g, time);
+				else {
+					if (x.open_button != null && x.collapseable)
+						x.open_button.draw(g, time);
+				}
 			}
 		}
-	}
-
-	public static boolean elementsAreHidden() {
-		return hide_all_elements;
-	}
-
-	/*
-	 * Sets the value of hide_all_elements to the value of what
-	 * 
-	 * @param what true if to show all elements, false otherwise
-	 */
-	public static void setHideAllElements(boolean what) {
-		hide_all_elements = what;
 	}
 
 	/*
@@ -167,7 +163,7 @@ public abstract class Paintable<T> {
 	 */
 	public static void onClick(Point p) {
 		for (Paintable<?> x : PAINTABLES)
-			if (x.isOpen && x.isInClick(p))
+			if (x.isOpen() && x.isInClick(p))
 				x.onClick();
 	}
 
@@ -215,7 +211,7 @@ public abstract class Paintable<T> {
 	 */
 	public static boolean isAnyInClick(Point p) {
 		for (Paintable<?> x : PAINTABLES)
-			if (x.isOpen && x.isInClick(p))
+			if (x.is_open && x.isInClick(p))
 				return true;
 		return false;
 	}

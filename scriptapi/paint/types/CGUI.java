@@ -1,4 +1,4 @@
-package scripts.api.scriptapi.paint;
+package scripts.api.scriptapi.paint.types;
 
 import javax.swing.JFrame;
 

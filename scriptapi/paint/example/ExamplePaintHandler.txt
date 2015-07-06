@@ -24,9 +24,9 @@ public class ExamplePaintHandler extends PaintHandler {
 		this.show_gui_button = new ShowGUIButton(gui);
 		this.generic_data_display = new DataDisplay();
 
-		Paintable.add(this.experience_display);
-		Paintable.add(this.show_gui_button);
-		Paintable.add(generic_data_display);
+		this.experience_display.register();
+		this.show_gui_button.register();
+		generic_data_display.register();
 
 	}
 

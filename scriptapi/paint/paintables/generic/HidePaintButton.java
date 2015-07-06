@@ -5,8 +5,12 @@ import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 
 public class HidePaintButton extends ButtonDisplay {
 
+	public HidePaintButton() {
+		this(330, 428, 12);
+	}
+
 	public HidePaintButton(int x, int y, int height) {
-		this(false, "Hide", x, y, 28, height);
+		this(false, "Hide", x, y, 35, height);
 	}
 
 	private HidePaintButton(boolean can_hide, String t, int x, int y,
@@ -16,8 +20,8 @@ public class HidePaintButton extends ButtonDisplay {
 
 	@Override
 	protected void onClick() {
-		Paintable.setHideAllElements(!Paintable.elementsAreHidden());
-		update(Paintable.elementsAreHidden() ? "Show" : "Hide");
+		Paintable.setHideAllElements(!Paintable.allElementsCollapsed());
+		update(Paintable.allElementsCollapsed() ? "Show" : "Hide");
 	}
 
 }
