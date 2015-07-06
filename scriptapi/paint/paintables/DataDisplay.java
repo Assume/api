@@ -41,13 +41,6 @@ public class DataDisplay extends Paintable<String[]> {
 	}
 
 	@Override
-	protected void onClick() {
-		System.out.println("On click being called for data display");
-		this.setOpen(false);
-		this.open_button.setOpen(true);
-	}
-
-	@Override
 	protected boolean isInClick(Point p) {
 		Rectangle rec = new Rectangle(x, y, width, height);
 		return rec.contains(p);

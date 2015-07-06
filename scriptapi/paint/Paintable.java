@@ -80,7 +80,10 @@ public abstract class Paintable<T> {
 		PAINTABLES.remove(this);
 	}
 
-	protected abstract void onClick();
+	protected void onClick(){
+		this.setOpen(false);
+		this.open_button.setOpen(true);
+	}
 
 	/*
 	 * Draws the Paintable object
@@ -133,7 +136,7 @@ public abstract class Paintable<T> {
 	 * otherwise
 	 */
 	public void setOpen(boolean what) {
-		if (Timing.timeFromMark(last_state_change) < 500)
+		if (Timing.timeFromMark(last_state_change) < 300)
 			return;
 		this.is_open = what;
 		this.last_state_change = System.currentTimeMillis();

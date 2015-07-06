@@ -83,11 +83,6 @@ public class ExperienceDisplay extends Paintable<Integer> {
 	}
 	
 	
-	@Override
-	protected void onClick() {
-		this.setOpen(false);
-		this.open_button.setOpen(true);
-	}
 
 	@Override
 	protected boolean isInClick(Point p) {

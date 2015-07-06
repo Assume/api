@@ -67,12 +67,6 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 	}
 
 	@Override
-	protected void onClick() {
-		this.setOpen(false);
-		this.open_button.setOpen(true);
-	}
-
-	@Override
 	protected boolean isInClick(Point p) {
 		return new Rectangle(super.x, super.y, WIDTH, HEIGHT).contains(p);
 	}
