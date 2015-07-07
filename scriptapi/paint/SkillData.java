@@ -53,6 +53,13 @@ public enum SkillData {
 		this.start_level = skill.getActualLevel();
 	}
 
+	public void reset() {
+		init();
+		this.exp = 0;
+		this.exp_to_next_level = 0;
+		this.percent_to_next_level = 0;
+	}
+
 	public int getType() {
 		return this.type;
 	}
@@ -114,7 +121,8 @@ public enum SkillData {
 
 	}
 
-	public static SkillData[] getSkillsWithExperienceGained(SkillData[] all_for_type) {
+	public static SkillData[] getSkillsWithExperienceGained(
+			SkillData[] all_for_type) {
 		List<SkillData> skills = new ArrayList<SkillData>();
 		for (SkillData x : all_for_type)
 			if (x.getExperienceGained() > 0)
@@ -122,4 +130,5 @@ public enum SkillData {
 		return skills.toArray(new SkillData[skills.size()]);
 
 	}
+
 }
