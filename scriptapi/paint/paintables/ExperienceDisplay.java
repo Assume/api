@@ -116,12 +116,11 @@ public class ExperienceDisplay extends Paintable<Integer> {
 	}
 
 	@Override
-	protected void onClick(Point p) {
+	public void onClick(Point p) {
 		if (p.x <= super.x + 242) {
 			super.onClick(p);
 			return;
 		}
-
 		SkillData skill = getSkillClicked(p);
 		if (skill != null)
 			skill.reset();

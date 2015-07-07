@@ -19,7 +19,6 @@ public class PaintTab extends Paintable<String> {
 		super(name, panel.x, panel.y + 15);
 		this.paintables = new ArrayList<Paintable<?>>();
 		this.panel = panel;
-		this.setOpen(false);
 		this.draw_background = true;
 	}
 
