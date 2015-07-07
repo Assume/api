@@ -65,7 +65,7 @@ public abstract class Paintable<T> {
 		return this.handler;
 	}
 
-	protected void onClick(Point p) {
+	public void onClick(Point p) {
 		this.setOpen(false);
 		this.open_button.setOpen(true);
 	}

@@ -21,7 +21,7 @@ public class OpenButton extends ButtonDisplay {
 	}
 
 	@Override
-	protected void onClick(Point p) {
+	public void onClick(Point p) {
 		this.setOpen(false);
 		paintable.setOpen(true);
 	}

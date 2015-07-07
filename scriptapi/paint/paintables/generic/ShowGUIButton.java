@@ -10,7 +10,7 @@ public class ShowGUIButton extends ButtonDisplay {
 	private CGUI gui;
 
 	public ShowGUIButton(CGUI gui) {
-		this(255, 428, 12, gui);
+		this(230, 459, 12, gui);
 	}
 
 	public ShowGUIButton(int x, int y, int height, CGUI gui) {
@@ -24,7 +24,7 @@ public class ShowGUIButton extends ButtonDisplay {
 	}
 
 	@Override
-	protected void onClick(Point p) {
+	public void onClick(Point p) {
 		this.gui.setVisible(true);
 	}
 

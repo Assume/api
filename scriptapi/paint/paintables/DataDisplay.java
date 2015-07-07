@@ -13,7 +13,7 @@ public class DataDisplay extends Paintable<String[]> {
 	private int height;
 
 	public DataDisplay() {
-		this(new String[0], 255, 349, 240, 76);
+		this(new String[0], 255, 349, 260, 76);
 	}
 
 	public DataDisplay(String[] t, int x, int y, int width, int height) {

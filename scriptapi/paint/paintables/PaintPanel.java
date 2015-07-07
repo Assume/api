@@ -32,21 +32,19 @@ public class PaintPanel extends Paintable<PaintTab> {
 
 	@Override
 	public void draw(Graphics g, long time) {
-			g.setFont(ARIAL_SIZE_ELEVEN);
-			int cur_x = super.x;
-			for (PaintTab x : tabs) {
-				g.setColor(x == current_tab ? Color.GRAY : VERY_LIGHT_GREY);
-				g.fillRect(cur_x, super.y, TAB_SELECTOR_WIDTH,
-						TAB_SELECTOR_HEIGHT);
-				g.setColor(Color.WHITE);
-				g.drawString(x.get(), cur_x + 7, super.y + 10);
-				g.setColor(Color.BLACK);
-				g.drawRect(cur_x, super.y, TAB_SELECTOR_WIDTH,
-						TAB_SELECTOR_HEIGHT);
-				cur_x += TAB_SELECTOR_WIDTH + 2;
-			}
-			if (this.current_tab != null && this.current_tab.isOpen())
-				this.current_tab.draw(g, time);
+		g.setFont(ARIAL_SIZE_ELEVEN);
+		int cur_x = super.x;
+		for (PaintTab x : tabs) {
+			g.setColor(x == current_tab ? Color.GRAY : VERY_LIGHT_GREY);
+			g.fillRect(cur_x, super.y, TAB_SELECTOR_WIDTH, TAB_SELECTOR_HEIGHT);
+			g.setColor(Color.WHITE);
+			g.drawString(x.get(), cur_x + 7, super.y + 10);
+			g.setColor(Color.BLACK);
+			g.drawRect(cur_x, super.y, TAB_SELECTOR_WIDTH, TAB_SELECTOR_HEIGHT);
+			cur_x += TAB_SELECTOR_WIDTH + 2;
+		}
+		if (this.current_tab != null && this.current_tab.isOpen())
+			this.current_tab.draw(g, time);
 	}
 
 	public void addTab(PaintTab tab) {
@@ -65,10 +63,10 @@ public class PaintPanel extends Paintable<PaintTab> {
 	}
 
 	@Override
-	protected void onClick(Point p) {
+	public void onClick(Point p) {
 		PaintTab tab = getClickedTab(p);
 		if (tab == null) {
-			super.onClick(p);
+			this.current_tab.onClick(p);
 			return;
 		}
 		if (tab == current_tab)

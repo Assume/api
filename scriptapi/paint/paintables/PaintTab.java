@@ -11,6 +11,8 @@ public class PaintTab extends Paintable<String> {
 
 	private PaintPanel panel;
 
+	private boolean draw_background;
+
 	private final List<Paintable<?>> paintables;
 
 	public PaintTab(String name, PaintPanel panel) {
@@ -18,6 +20,11 @@ public class PaintTab extends Paintable<String> {
 		this.paintables = new ArrayList<Paintable<?>>();
 		this.panel = panel;
 		this.setOpen(false);
+		this.draw_background = true;
+	}
+
+	public void setDrawBackground(boolean what) {
+		this.draw_background = what;
 	}
 
 	public void add(Paintable<?> x) {
@@ -28,7 +35,8 @@ public class PaintTab extends Paintable<String> {
 		if (!this.isOpen())
 			return;
 		g.setColor(TRANSPARENT_GREY);
-		g.fillRect(super.x, super.y, panel.getWidth(), panel.getHeight());
+		if (draw_background)
+			g.fillRect(super.x, super.y, panel.getWidth(), panel.getHeight());
 		int total_height = 0;
 		for (Paintable<?> temp_paintable : paintables) {
 			temp_paintable.y = this.panel.y + 20 + total_height;
@@ -44,8 +52,15 @@ public class PaintTab extends Paintable<String> {
 	}
 
 	@Override
-	protected void onClick(Point p) {
-		return;
+	public void onClick(Point p) {
+		for (Paintable<?> x : paintables) {
+			if (x instanceof ButtonDisplay) {
+				ButtonDisplay temp = (ButtonDisplay) x;
+				if (temp.isInClick(p))
+					temp.onClick(p);
+			}
+		}
+
 	}
 
 	@Override

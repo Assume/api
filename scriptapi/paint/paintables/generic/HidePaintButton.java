@@ -7,7 +7,7 @@ import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 public class HidePaintButton extends ButtonDisplay {
 
 	public HidePaintButton() {
-		this(320, 428, 12);
+		this(295, 459, 12);
 	}
 
 	public HidePaintButton(int x, int y, int height) {
@@ -20,7 +20,7 @@ public class HidePaintButton extends ButtonDisplay {
 	}
 
 	@Override
-	protected void onClick(Point p) {
+	public void onClick(Point p) {
 		super.getHandler().setCollapseAllElements(!super.getHandler().allElementsCollapsed());
 		update(super.getHandler().allElementsCollapsed() ? "Show" : "Hide");
 	}
