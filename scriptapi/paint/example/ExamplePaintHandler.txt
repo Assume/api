@@ -28,7 +28,7 @@ public class ExamplePaintHandler extends PaintHandler {
 
 		this.experience_display.register(this);
 		this.show_gui_button.register(this);
-		generic_data_display.register(this);
+		this.generic_data_display.register(this);
 		
 		this.panel = new PaintPanel(50, 50, 150, 150);
 		this.panel.register(this);

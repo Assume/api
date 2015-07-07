@@ -11,7 +11,7 @@ import scripts.api.scriptapi.paint.CGUI;
 import scripts.api.scriptapi.paint.PaintHandler;
 
 public class PaintExampleScript extends Script implements Painting,
-		MouseActions {
+		EventBlockingOverride {
 
 	private PaintHandler paint_handler;
 	private CGUI gui;
@@ -33,30 +33,25 @@ public class PaintExampleScript extends Script implements Painting,
 	public void onPaint(Graphics arg0) {
 		this.paint_handler.draw(arg0, getRunningTime());
 	}
-
+	
 	@Override
-	public void mouseClicked(Point arg0, int arg1, boolean arg2) {
-		if (!arg2)
-			this.paint_handler.onClick(arg0);
-
+	public EventBlockingOverride.OVERRIDE_RETURN overrideKeyEvent(KeyEvent arg0) {
+		return EventBlockingOverride.OVERRIDE_RETURN.PROCESS;
 	}
 
 	@Override
-	public void mouseDragged(Point arg0, int arg1, boolean arg2) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseMoved(Point arg0, boolean arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(Point arg0, int arg1, boolean arg2) {
-		// TODO Auto-generated method stub
-
+	public EventBlockingOverride.OVERRIDE_RETURN overrideMouseEvent(MouseEvent e) {
+		if (this.paint_handler != null
+				&& this.paint_handler.isAnyInClick(e.getPoint())) {
+			if (e.getID() == 500) {
+				e.consume();
+				this.paint_handler.onClick(e.getPoint());
+				return EventBlockingOverride.OVERRIDE_RETURN.DISMISS;
+			} else if (e.getID() == 501) {
+				return EventBlockingOverride.OVERRIDE_RETURN.DISMISS;
+			}
+		}
+		return EventBlockingOverride.OVERRIDE_RETURN.PROCESS;
 	}
 
 }
