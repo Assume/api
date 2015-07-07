@@ -9,15 +9,12 @@ import scripts.api.scriptapi.paint.Paintable;
 
 public class PaintTab extends Paintable<String> {
 
-	private int x;
-	private int y;
-
 	private PaintPanel panel;
 
 	private final List<Paintable<?>> paintables;
 
-	public PaintTab(String name, int x, int y, PaintPanel panel) {
-		super(name, x, y);
+	public PaintTab(String name, PaintPanel panel) {
+		super(name, panel.x, panel.y + 15);
 		this.paintables = new ArrayList<Paintable<?>>();
 		this.panel = panel;
 		this.setOpen(false);
@@ -30,10 +27,15 @@ public class PaintTab extends Paintable<String> {
 	public void draw(Graphics g, long time) {
 		if (!this.isOpen())
 			return;
-		g.fillRect(x, y, panel.getWidth(), panel.getHeight());
-		for (Paintable<?> x : paintables)
-			x.draw(g, time);
-
+		g.setColor(TRANSPARENT_GREY);
+		g.fillRect(super.x, super.y, panel.getWidth(), panel.getHeight());
+		int total_height = 0;
+		for (Paintable<?> temp_paintable : paintables) {
+			temp_paintable.y = this.panel.y + 20 + total_height;
+			temp_paintable.x = this.panel.x + 5;
+			temp_paintable.draw(g, time);
+			total_height += temp_paintable.getHeight() + 15;
+		}
 	}
 
 	@Override

@@ -10,12 +10,19 @@ import scripts.api.scriptapi.paint.SkillData;
 
 public class ExperienceDisplay extends Paintable<Integer> {
 
+	private boolean move_up;
+
 	public ExperienceDisplay(Integer type) {
-		this(type, 8, 320);
+		this(type, true);
 	}
 
-	public ExperienceDisplay(Integer type, int x, int y) {
+	public ExperienceDisplay(Integer type, boolean move_up) {
+		this(type, 8, 320, move_up);
+	}
+
+	public ExperienceDisplay(Integer type, int x, int y, boolean move_up) {
 		super(type, x, y);
+		this.move_up = move_up;
 	}
 
 	@Override
@@ -36,7 +43,11 @@ public class ExperienceDisplay extends Paintable<Integer> {
 		int i = 0;
 		for (final SkillData skill : SkillData.getAllForType(super.get())) {
 			if (skill.getExperienceGained() > 0) {
-				int y = 320 - (16 * i);
+				int y;
+				if (this.move_up)
+					y = super.y - (16 * i);
+				else
+					y = super.y + (16 * i);
 				// Bar
 				g.setColor(Color.GRAY);
 				g.fillRect(super.x, y, 242, 13);

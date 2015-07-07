@@ -11,9 +11,9 @@ import scripts.api.scriptapi.paint.Paintable;
 
 public class PaintPanel extends Paintable<PaintTab> {
 
-	private static final int TAB_SELECTOR_WIDTH = 40;
+	private static final int TAB_SELECTOR_WIDTH = 80;
 
-	private static final int TAB_SELECTOR_HEIGHT = 15;
+	private static final int TAB_SELECTOR_HEIGHT = 12;
 
 	private List<PaintTab> tabs;
 
@@ -32,23 +32,30 @@ public class PaintPanel extends Paintable<PaintTab> {
 
 	@Override
 	public void draw(Graphics g, long time) {
-		int cur_x = super.x;
-		for (PaintTab x : tabs) {
-			g.setColor(x == current_tab ? Color.GRAY : VERY_LIGHT_GREY);
-			g.fillRect(cur_x, super.y, TAB_SELECTOR_WIDTH, TAB_SELECTOR_HEIGHT);
-			g.drawString(x.get(), cur_x + 10, super.y + 5);
-			g.setColor(Color.BLACK);
-			g.drawRect(cur_x, super.y, TAB_SELECTOR_WIDTH, TAB_SELECTOR_HEIGHT);
-			cur_x += 42;
-		}
-		if (this.current_tab != null && this.current_tab.isOpen())
-			this.current_tab.draw(g, time);
+			g.setFont(ARIAL_SIZE_ELEVEN);
+			int cur_x = super.x;
+			for (PaintTab x : tabs) {
+				g.setColor(x == current_tab ? Color.GRAY : VERY_LIGHT_GREY);
+				g.fillRect(cur_x, super.y, TAB_SELECTOR_WIDTH,
+						TAB_SELECTOR_HEIGHT);
+				g.setColor(Color.WHITE);
+				g.drawString(x.get(), cur_x + 7, super.y + 10);
+				g.setColor(Color.BLACK);
+				g.drawRect(cur_x, super.y, TAB_SELECTOR_WIDTH,
+						TAB_SELECTOR_HEIGHT);
+				cur_x += TAB_SELECTOR_WIDTH + 2;
+			}
+			if (this.current_tab != null && this.current_tab.isOpen())
+				this.current_tab.draw(g, time);
 	}
 
 	public void addTab(PaintTab tab) {
 		this.tabs.add(tab);
-		if (this.current_tab == null)
+		if (this.current_tab == null) {
 			this.current_tab = tabs.get(0);
+			this.current_tab.setOpen(true);
+		}
+
 	}
 
 	@Override
@@ -60,8 +67,10 @@ public class PaintPanel extends Paintable<PaintTab> {
 	@Override
 	protected void onClick(Point p) {
 		PaintTab tab = getClickedTab(p);
-		if (tab == null)
+		if (tab == null) {
+			super.onClick(p);
 			return;
+		}
 		if (tab == current_tab)
 			current_tab.setOpen(!current_tab.isOpen());
 		else {

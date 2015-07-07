@@ -26,8 +26,8 @@ public abstract class Paintable<T> {
 	private boolean is_open;
 	private boolean collapseable;
 
-	protected int x;
-	protected int y;
+	public int x;
+	public int y;
 
 	protected long last_state_change;
 
@@ -69,7 +69,7 @@ public abstract class Paintable<T> {
 		this.setOpen(false);
 		this.open_button.setOpen(true);
 	}
-
+	
 	public abstract int getWidth();
 	
 	public abstract int getHeight();
