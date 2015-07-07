@@ -40,6 +40,17 @@ public class DataDisplay extends Paintable<String[]> {
 
 	}
 
+	
+	@Override
+	public int getWidth() {
+		return width;
+	}
+
+	@Override
+	public int getHeight() {
+		return height;
+	}
+
 	@Override
 	protected boolean isInClick(Point p) {
 		Rectangle rec = new Rectangle(x, y, width, height);

@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.tribot.api.Timing;
 
@@ -14,23 +12,6 @@ import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 import scripts.api.scriptapi.paint.paintables.generic.OpenButton;
 
 public abstract class Paintable<T> {
-
-	private static final List<Paintable<?>> PAINTABLES = new ArrayList<Paintable<?>>();
-
-	private static boolean collapse_all = false;
-
-	public static boolean allElementsCollapsed() {
-		return collapse_all;
-	}
-
-	/*
-	 * Sets the value of hide_all_elements to the value of what
-	 * 
-	 * @param what true if to show all elements, false otherwise
-	 */
-	public static void setHideAllElements(boolean what) {
-		collapse_all = what;
-	}
 
 	protected final static Color DARK_GREY = new Color(0, 0, 0, 175);
 	protected final static Color VERY_LIGHT_GREY = new Color(255, 255, 255, 150);
@@ -52,39 +33,47 @@ public abstract class Paintable<T> {
 
 	protected ButtonDisplay open_button;
 
+	protected PaintHandler handler;
+
+	public Paintable(int x, int y) {
+		this(null, x, y);
+	}
+
 	public Paintable(T t, int x, int y) {
 		this(t, x, y, true);
 	}
-
+	
 	public Paintable(T t, int x, int y, boolean collapseable) {
 		this.t = t;
 		this.is_open = true;
 		this.collapseable = collapseable;
 		this.x = x;
 		this.y = y;
-		if (!(this instanceof OpenButton)) {
-			this.open_button = new OpenButton(x, y, this);
-			this.open_button.register();
-		}
 		this.last_state_change = System.currentTimeMillis() - 5000;
 	}
 
-	public void register() {
-		PAINTABLES.add(this);
+	public void register(PaintHandler handler) {
+		this.handler = handler;
+		this.handler.register(this);
+		if (!(this instanceof OpenButton)) {
+			this.open_button = new OpenButton(x, y, this);
+			this.open_button.register(handler);
+		}
 	}
 
-	/*
-	 * Removes self from the list of Paintables
-	 */
-	public void remove() {
-		PAINTABLES.remove(this);
+	public final PaintHandler getHandler() {
+		return this.handler;
 	}
 
-	protected void onClick(){
+	protected void onClick(Point p) {
 		this.setOpen(false);
 		this.open_button.setOpen(true);
 	}
 
+	public abstract int getWidth();
+	
+	public abstract int getHeight();
+	
 	/*
 	 * Draws the Paintable object
 	 */
@@ -142,34 +131,6 @@ public abstract class Paintable<T> {
 		this.last_state_change = System.currentTimeMillis();
 	}
 
-	public static void drawAll(Graphics g, long time) {
-		if (allElementsCollapsed()) {
-			for (Paintable<?> x : PAINTABLES)
-				if (!x.collapseable && x.isOpen())
-					x.draw(g, time);
-		} else {
-			for (Paintable<?> x : PAINTABLES) {
-				if (x.isOpen())
-					x.draw(g, time);
-				else {
-					if (x.open_button != null && x.collapseable)
-						x.open_button.draw(g, time);
-				}
-			}
-		}
-	}
-
-	/*
-	 * Calls the onClick method on all open Paintables that contain Point p
-	 * 
-	 * @param p the location of the click
-	 */
-	public static void onClick(Point p) {
-		for (Paintable<?> x : PAINTABLES)
-			if (x.isOpen() && x.isInClick(p))
-				x.onClick();
-	}
-
 	/*
 	 * @param s the String to be evaluated
 	 * 
@@ -207,16 +168,8 @@ public abstract class Paintable<T> {
 		return "" + num;
 	}
 
-	/*
-	 * @param p the point being checked
-	 * 
-	 * @return true if any element contains Point p, else false
-	 */
-	public static boolean isAnyInClick(Point p) {
-		for (Paintable<?> x : PAINTABLES)
-			if (x.is_open && x.isInClick(p))
-				return true;
-		return false;
+	public boolean isCollapseable() {
+		return this.collapseable;
 	}
 
 }

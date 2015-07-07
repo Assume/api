@@ -65,10 +65,22 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		return (int) Math
 				.ceil(((double) super.get().getHealth() / (double) health) * 120);
 	}
+	
+	
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight() {
+		return HEIGHT;
+	}
 
 	@Override
 	protected boolean isInClick(Point p) {
 		return new Rectangle(super.x, super.y, WIDTH, HEIGHT).contains(p);
 	}
+
 
 }

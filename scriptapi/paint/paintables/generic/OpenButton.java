@@ -1,5 +1,7 @@
 package scripts.api.scriptapi.paint.paintables.generic;
 
+import java.awt.Point;
+
 import scripts.api.scriptapi.paint.Paintable;
 import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 
@@ -19,7 +21,7 @@ public class OpenButton extends ButtonDisplay {
 	}
 
 	@Override
-	protected void onClick() {
+	protected void onClick(Point p) {
 		this.setOpen(false);
 		paintable.setOpen(true);
 	}

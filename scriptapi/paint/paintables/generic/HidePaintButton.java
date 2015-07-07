@@ -1,6 +1,7 @@
 package scripts.api.scriptapi.paint.paintables.generic;
 
-import scripts.api.scriptapi.paint.Paintable;
+import java.awt.Point;
+
 import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 
 public class HidePaintButton extends ButtonDisplay {
@@ -19,9 +20,9 @@ public class HidePaintButton extends ButtonDisplay {
 	}
 
 	@Override
-	protected void onClick() {
-		Paintable.setHideAllElements(!Paintable.allElementsCollapsed());
-		update(Paintable.allElementsCollapsed() ? "Show" : "Hide");
+	protected void onClick(Point p) {
+		super.getHandler().setCollapseAllElements(!super.getHandler().allElementsCollapsed());
+		update(super.getHandler().allElementsCollapsed() ? "Show" : "Hide");
 	}
 
 }

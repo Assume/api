@@ -19,6 +19,18 @@ public class ExperienceDisplay extends Paintable<Integer> {
 	}
 
 	@Override
+	public int getWidth() {
+		return 242;
+	}
+
+	@Override
+	public int getHeight() {
+		SkillData[] data = SkillData.getSkillsWithExperienceGained(SkillData
+				.getAllForType(super.get()));
+		return 16 * data.length;
+	}
+
+	@Override
 	public void draw(Graphics g, long time) {
 		g.setFont(ARIAL_SIZE_NINE);
 		int i = 0;
@@ -81,8 +93,6 @@ public class ExperienceDisplay extends Paintable<Integer> {
 		}
 		return (hours + ":" + minutes + ":" + seconds);
 	}
-	
-	
 
 	@Override
 	protected boolean isInClick(Point p) {

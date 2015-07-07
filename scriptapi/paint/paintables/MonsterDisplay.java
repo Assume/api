@@ -29,11 +29,14 @@ public class MonsterDisplay extends Paintable<RSNPC> {
 	}
 
 	@Override
-	protected void onClick() {
-		this.setOpen(false);
-		this.open_button.setOpen(true);
+	public int getWidth() {
+		return 0;
 	}
-	
+
+	@Override
+	public int getHeight() {
+		return 0;
+	}
 	
 	@Override
 	protected boolean isInClick(Point p) {

@@ -1,5 +1,7 @@
 package scripts.api.scriptapi.paint.paintables.generic;
 
+import java.awt.Point;
+
 import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 import scripts.api.scriptapi.paint.types.CGUI;
 
@@ -22,7 +24,7 @@ public class ShowGUIButton extends ButtonDisplay {
 	}
 
 	@Override
-	protected void onClick() {
+	protected void onClick(Point p) {
 		this.gui.setVisible(true);
 	}
 
