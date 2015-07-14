@@ -34,12 +34,12 @@ public class PaintTab extends Paintable<String> {
 		if (!this.isOpen())
 			return;
 		g.setColor(TRANSPARENT_GREY);
-		if (draw_background)
+		if (this.draw_background)
 			g.fillRect(super.x, super.y, panel.getWidth(), panel.getHeight());
 		int total_height = 0;
 		for (Paintable<?> temp_paintable : paintables) {
 			temp_paintable.y = this.panel.y + 20 + total_height;
-			temp_paintable.x = this.panel.x + 5;
+			temp_paintable.x = this.draw_background ? this.panel.x + 5 : this.panel.x;
 			temp_paintable.draw(g, time);
 			total_height += temp_paintable.getHeight() + 15;
 		}
