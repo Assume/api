@@ -1,4 +1,4 @@
-package scripts.api.scriptapi.paint.paintables;
+package scripts.api.scriptapi.paint.paintables.tabs;
 
 import java.awt.Graphics;
 import java.awt.Point;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scripts.api.scriptapi.paint.Paintable;
+import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 
 public class PaintTab extends Paintable<String> {
 
@@ -22,6 +23,9 @@ public class PaintTab extends Paintable<String> {
 		this.draw_background = true;
 	}
 
+	/*
+	 * @param what sets the value of draw_background to that of what
+	 */
 	public void setDrawBackground(boolean what) {
 		this.draw_background = what;
 	}

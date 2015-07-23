@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import scripts.api.scriptapi.paint.paintables.PaintTab;
+import scripts.api.scriptapi.paint.paintables.tabs.PaintTab;
 
 public abstract class PaintHandler {
 

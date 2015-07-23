@@ -18,6 +18,10 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 	private static final int WIDTH = 125;
 	private static final int HEIGHT = 30;
 
+	public RSCharacterHealthDisplay() {
+		this(null, DEFAULT_X, DEFAULT_Y);
+	}
+
 	public RSCharacterHealthDisplay(RSCharacter t) {
 		this(t, DEFAULT_X, DEFAULT_Y);
 	}
@@ -65,8 +69,7 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		return (int) Math
 				.ceil(((double) super.get().getHealth() / (double) health) * 120);
 	}
-	
-	
+
 	@Override
 	public int getWidth() {
 		return WIDTH;
@@ -81,6 +84,5 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 	protected boolean isInClick(Point p) {
 		return new Rectangle(super.x, super.y, WIDTH, HEIGHT).contains(p);
 	}
-
 
 }

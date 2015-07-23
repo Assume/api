@@ -1,4 +1,4 @@
-package scripts.api.scriptapi.paint.paintables;
+package scripts.api.scriptapi.paint.paintables.tabs;
 
 import java.awt.Color;
 import java.awt.Graphics;
