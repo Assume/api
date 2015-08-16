@@ -10,7 +10,7 @@ public class ShowGUIButton extends ButtonDisplay {
 	private CGUI gui;
 
 	public ShowGUIButton(CGUI gui) {
-		this(230, 459, 12, gui);
+		this(230, 460, 12, gui);
 	}
 
 	public ShowGUIButton(int x, int y, int height, CGUI gui) {

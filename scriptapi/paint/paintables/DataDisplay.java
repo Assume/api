@@ -25,7 +25,7 @@ public class DataDisplay extends Paintable<String[]> {
 	@Override
 	public void draw(Graphics g, long time) {
 		g.setColor(DARK_GREY);
-		g.fillRect(x, y, width, height);
+		g.fillRect(x, y, width, super.get().length * 19);
 		g.setFont(ARIAL_SIZE_ELEVEN);
 		int c = 0;
 		for (String s : super.get()) {

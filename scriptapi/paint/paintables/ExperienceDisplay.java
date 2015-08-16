@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import scripts.api.scriptapi.paint.Calculations;
 import scripts.api.scriptapi.paint.Paintable;
 import scripts.api.scriptapi.paint.SkillData;
 
@@ -49,14 +50,17 @@ public class ExperienceDisplay extends Paintable<Integer> {
 					t_y = super.y - (16 * i);
 				else
 					t_y = super.y + (16 * i);
+
+				int percent = skill.getPercentToNextLevel();
+				int amount = (percent * 242) / 100;
 				// Bar
 				g.setColor(Color.GRAY);
-				g.fillRect(super.x, t_y, 242, 13);
+				g.fillRect(super.x + amount, t_y, 242 - amount, 13);
 
 				// Progress
 				g.setColor(DARK_GREY);
 				g.fillRect(super.x, t_y,
-						skill.getPercentToNextLevel() * 242 / 100, 13);
+						amount, 13);
 
 				// Trim
 				g.setColor(Color.BLACK);
@@ -83,8 +87,8 @@ public class ExperienceDisplay extends Paintable<Integer> {
 		return (skill.toString() + " | "
 				+ (skill.getLevelsGained() + skill.getStartingLevel()) + "("
 				+ skill.getLevelsGained() + ") | "
-				+ formatNumber(skill.getExperienceGained()) + " XP | "
-				+ formatNumber(getExperiencePerHour(runtime, skill))
+				+ Calculations.formatNumber(skill.getExperienceGained()) + " XP | "
+				+ Calculations.formatNumber(getExperiencePerHour(runtime, skill))
 				+ " XP/HR | TTL: " + getFormattedTime(getTimeToLevel(runtime,
 					skill)));
 	}

@@ -7,7 +7,7 @@ import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 public class HidePaintButton extends ButtonDisplay {
 
 	public HidePaintButton() {
-		this(295, 459, 12);
+		this(295, 460, 12);
 	}
 
 	public HidePaintButton(int x, int y, int height) {

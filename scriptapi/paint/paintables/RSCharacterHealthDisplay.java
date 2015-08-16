@@ -43,13 +43,15 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		g.setColor(Color.BLACK);
 		g.drawRect(super.x, super.y, WIDTH, HEIGHT);
 
+		int amount = getBarPixelLength();
+		
 		// FULL BAR
 		g.setColor(Color.GRAY);
-		g.fillRect(super.x + 3, super.y + 14, 120, 14);
+		g.fillRect(super.x + 3 + amount, super.y + 14, 120 - amount, 14);
 
 		// PERCENT BAR
 		g.setColor(DARK_GREY);
-		g.fillRect(super.x + 3, super.y + 14, getBarPixelLength(), 14);
+		g.fillRect(super.x + 3, super.y + 14, amount, 14);
 
 		g.setColor(Color.WHITE);
 		g.drawString(super.get().getName(), super.x + 50, super.y + 11);
