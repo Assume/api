@@ -25,7 +25,10 @@ public class DataDisplay extends Paintable<String[]> {
 	@Override
 	public void draw(Graphics g, long time) {
 		g.setColor(DARK_GREY);
-		g.fillRect(x, y, width, super.get().length * 19);
+		int widest = getWidestData(g);
+		int width_addition = widest < width ? 0 : widest - width + 30;
+		g.fillRect(x, y, width + width_addition, (super.get().length * 19)
+				- (super.get().length / 3));
 		g.setFont(ARIAL_SIZE_ELEVEN);
 		int c = 0;
 		for (String s : super.get()) {
@@ -40,7 +43,16 @@ public class DataDisplay extends Paintable<String[]> {
 
 	}
 
-	
+	private int getWidestData(Graphics g) {
+		int longest = 0;
+		for (String x : super.get()) {
+			int length = super.getStringPixelLength(x, g);
+			if (length > longest)
+				longest = length;
+		}
+		return longest;
+	}
+
 	@Override
 	public int getWidth() {
 		return width;
