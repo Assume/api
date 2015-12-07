@@ -23,7 +23,7 @@ public class PaintPanel extends Paintable<PaintTab> {
 	private int height;
 
 	public PaintPanel(int x, int y, int width, int height) {
-		super(null, x, y, false);
+		super(null, x, y, true);
 		this.tabs = new ArrayList<PaintTab>();
 		this.width = width;
 		this.height = height;

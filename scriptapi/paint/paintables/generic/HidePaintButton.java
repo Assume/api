@@ -11,7 +11,7 @@ public class HidePaintButton extends ButtonDisplay {
 	}
 
 	public HidePaintButton(int x, int y, int height) {
-		this(false, "Hide", x, y, 30, height);
+		this(false, "Hide", x, y, 35, height);
 	}
 
 	private HidePaintButton(boolean can_hide, String t, int x, int y,
