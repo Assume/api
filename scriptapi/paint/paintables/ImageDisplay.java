@@ -30,7 +30,7 @@ public class ImageDisplay extends Paintable<BufferedImage> {
 	}
 
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		Rectangle rec = new Rectangle(x, y, super.get().getWidth(), super.get()
 				.getHeight());
 		return rec.contains(p);

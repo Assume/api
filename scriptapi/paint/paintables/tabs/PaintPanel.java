@@ -57,7 +57,7 @@ public class PaintPanel extends Paintable<PaintTab> {
 	}
 
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		Rectangle rec = new Rectangle(super.x, super.y, this.width, this.height);
 		return rec.contains(p);
 	}

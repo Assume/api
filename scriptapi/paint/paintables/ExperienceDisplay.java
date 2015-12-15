@@ -40,7 +40,6 @@ public class ExperienceDisplay extends Paintable<Integer> {
 
 	@Override
 	public void draw(Graphics g, long time) {
-
 		int i = 0;
 		for (final SkillData skill : SkillData.getAllForType(super.get())) {
 			if (skill.getExperienceGained() > 0) {
@@ -59,8 +58,7 @@ public class ExperienceDisplay extends Paintable<Integer> {
 
 				// Progress
 				g.setColor(DARK_GREY);
-				g.fillRect(super.x, t_y,
-						amount, 13);
+				g.fillRect(super.x, t_y, amount, 13);
 
 				// Trim
 				g.setColor(Color.BLACK);
@@ -77,18 +75,22 @@ public class ExperienceDisplay extends Paintable<Integer> {
 				g.setColor(Color.BLACK);
 				g.drawRect(super.x + 244, t_y, 13, 13);
 				g.drawString("x", super.x + 249, t_y + 10);
-
 				i++;
 			}
 		}
 	}
 
 	private String toString(Long runtime, SkillData skill) {
-		return (skill.toString() + " | "
-				+ (skill.getLevelsGained() + skill.getStartingLevel()) + "("
-				+ skill.getLevelsGained() + ") | "
-				+ Calculations.formatNumber(skill.getExperienceGained()) + " XP | "
-				+ Calculations.formatNumber(getExperiencePerHour(runtime, skill))
+		return (skill.toString()
+				+ " | "
+				+ (skill.getLevelsGained() + skill.getStartingLevel())
+				+ "("
+				+ skill.getLevelsGained()
+				+ ") | "
+				+ Calculations.formatNumber(skill.getExperienceGained())
+				+ " XP | "
+				+ Calculations
+						.formatNumber(getExperiencePerHour(runtime, skill))
 				+ " XP/HR | TTL: " + getFormattedTime(getTimeToLevel(runtime,
 					skill)));
 	}
@@ -134,23 +136,23 @@ public class ExperienceDisplay extends Paintable<Integer> {
 	private SkillData getSkillClicked(Point p) {
 		SkillData[] data = SkillData.getSkillsWithExperienceGained(SkillData
 				.getAllForType(super.get()));
-		int t_t = Math.abs((super.y + data.length * 16) - p.y);
+		int t_t = Math.abs((super.y + (data.length * 16)) - p.y);
 		if (t_t <= 16 && data.length > 0)
-			return data[0];
-		int index = (int) Math.ceil(((double) t_t - 32) / 16.0);
+			return data[data.length - 1];
+		int index = (int) Math.floor(((double) t_t - 16) / 16.0);
 		if (index >= data.length)
 			return null;
 		return data[index];
 	}
 
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		SkillData[] data = SkillData.getSkillsWithExperienceGained(SkillData
 				.getAllForType(super.get()));
 		if (data.length == 0)
 			return false;
 		int height = 16 * data.length;
-		Rectangle rec = new Rectangle(x, (y + 13) - height, 257, height);
+		Rectangle rec = new Rectangle(x, y, 257, height);
 		return rec.contains(p);
 	}
 

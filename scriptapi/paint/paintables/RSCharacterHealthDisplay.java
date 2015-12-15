@@ -83,7 +83,7 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 	}
 
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		return new Rectangle(super.x, super.y, WIDTH, HEIGHT).contains(p);
 	}
 

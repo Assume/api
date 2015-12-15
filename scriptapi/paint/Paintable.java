@@ -41,7 +41,7 @@ public abstract class Paintable<T> {
 	public Paintable(T t, int x, int y) {
 		this(t, x, y, true);
 	}
-	
+
 	public Paintable(T t, int x, int y, boolean collapseable) {
 		this.t = t;
 		this.is_open = true;
@@ -66,13 +66,14 @@ public abstract class Paintable<T> {
 
 	public void onClick(Point p) {
 		this.setOpen(false);
-		this.open_button.setOpen(true);
+		if (this.open_button != null)
+			this.open_button.setOpen(true);
 	}
-	
+
 	public abstract int getWidth();
-	
+
 	public abstract int getHeight();
-	
+
 	/*
 	 * Draws the Paintable object
 	 */
@@ -83,7 +84,7 @@ public abstract class Paintable<T> {
 	 * scripts.api.scriptapi.paint.ButtonDisplay} must override this
 	 */
 
-	protected abstract boolean isInClick(Point p);
+	public abstract boolean isInClick(Point p);
 
 	/*
 	 * Draws a button to allow the user to reopen the Paintable

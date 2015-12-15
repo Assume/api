@@ -39,7 +39,7 @@ public class MonsterDisplay extends Paintable<RSNPC> {
 	}
 	
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		return false;
 	}
 

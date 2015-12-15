@@ -64,7 +64,7 @@ public class DataDisplay extends Paintable<String[]> {
 	}
 
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		Rectangle rec = new Rectangle(x, y, width, height);
 		return rec.contains(p);
 	}

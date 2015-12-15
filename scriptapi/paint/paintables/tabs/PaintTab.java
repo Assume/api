@@ -50,20 +50,19 @@ public class PaintTab extends Paintable<String> {
 	}
 
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
+		for (Paintable<?> x : paintables) 
+			if (x.isInClick(p))
+				return true;
 		return false;
 	}
 
 	@Override
 	public void onClick(Point p) {
-		for (Paintable<?> x : paintables) {
-			if (x instanceof ButtonDisplay) {
-				ButtonDisplay temp = (ButtonDisplay) x;
-				if (temp.isInClick(p))
-					temp.onClick(p);
-			}
-		}
-
+		for (Paintable<?> x : paintables) 
+				if (x.isInClick(p))
+					x.onClick(p);
+		
 	}
 
 	@Override

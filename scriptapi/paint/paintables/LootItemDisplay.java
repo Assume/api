@@ -29,7 +29,7 @@ public class LootItemDisplay extends Paintable<RSGroundItem> {
 	}
 	
 	@Override
-	protected boolean isInClick(Point p) {
+	public boolean isInClick(Point p) {
 		return false;
 	}
 
