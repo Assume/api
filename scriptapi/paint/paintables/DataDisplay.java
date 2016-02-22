@@ -27,20 +27,23 @@ public class DataDisplay extends Paintable<String[]> {
 		g.setColor(DARK_GREY);
 		int widest = getWidestData(g);
 		int width_addition = widest < width ? 0 : widest - width + 30;
-		g.fillRect(x, y, width + width_addition, (super.get().length * 19)
-				- (super.get().length / 3));
+		g.fillRect(
+				x,
+				y,
+				width + width_addition,
+				(int) ((super.get().length * 19) - (super.get().length == 1 ? -5
+						: (Math.floor(super.get().length / 5) * 3))));
 		g.setFont(ARIAL_SIZE_ELEVEN);
-		int c = 0;
+		int counter = 0;
 		for (String s : super.get()) {
 			g.setColor(VERY_LIGHT_GREY);
 			int length = super.getStringPixelLength(s, g);
-			g.fillRect(x + 5, (y + 5) + (17 * c), length + 20, 14);
+			g.fillRect(x + 5, (y + 4) + (17 * counter), length + 20, 14);
 			g.setColor(Color.BLACK);
-			g.drawRect(x + 5, (y + 5) + (17 * c), length + 20, 14);
-			g.drawString(s, x + 15, (y + 16) + 17 * c);
-			c++;
+			g.drawRect(x + 5, (y + 4) + (17 * counter), length + 20, 14);
+			g.drawString(s, x + 15, (y + 15) + 17 * counter);
+			counter++;
 		}
-
 	}
 
 	private int getWidestData(Graphics g) {
