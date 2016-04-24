@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scripts.api.scriptapi.paint.Paintable;
-import scripts.api.scriptapi.paint.paintables.ButtonDisplay;
 
 public class PaintTab extends Paintable<String> {
 
