@@ -32,9 +32,9 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 
 	@Override
 	public void draw(Graphics g, long time) {
-		if (super.get() == null || !super.get().isInCombat())
+		if (super.get() == null || !super.get().isInCombat()) 
 			return;
-
+		
 		g.setFont(ARIAL_SIZE_ELEVEN);
 		// OUTER BOX
 		g.setColor(TRANSPARENT_GREY);
@@ -44,7 +44,7 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		g.drawRect(super.x, super.y, WIDTH, HEIGHT);
 
 		int amount = getBarPixelLength();
-
+		
 		// FULL BAR
 		g.setColor(Color.GRAY);
 		g.fillRect(super.x + 3 + amount, super.y + 14, 120 - amount, 14);
@@ -56,7 +56,9 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		g.setColor(Color.WHITE);
 		g.drawString(super.get().getName(), super.x + 50, super.y + 11);
 
-		g.drawString(super.get().getHealth() + "/" + super.get().getMaxHealth(), super.x + 51, super.y + 25);
+		g.drawString(
+				super.get().getHealth() + "/" + super.get().getMaxHealth(),
+				super.x + 51, super.y + 25);
 
 	}
 
@@ -66,7 +68,8 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		int health = super.get().getMaxHealth();
 		if (health == 0)
 			return 0;
-		return (int) Math.ceil(((double) super.get().getHealth() / (double) health) * 120);
+		return (int) Math
+				.ceil(((double) super.get().getHealth() / (double) health) * 120);
 	}
 
 	@Override

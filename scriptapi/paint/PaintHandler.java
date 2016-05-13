@@ -12,8 +12,11 @@ public abstract class PaintHandler {
 	private final List<Paintable<?>> paintables;
 
 	private boolean hide_all_elements;
+	
+	protected String version;
 
-	public PaintHandler() {
+	public PaintHandler(String version) {
+		this.version = version;
 		this.paintables = new ArrayList<Paintable<?>>();
 		this.hide_all_elements = false;
 	}
