@@ -2,7 +2,7 @@ package scripts.api.scriptapi.logging;
 
 import java.util.Date;
 
-public class ScriptLog {
+public class ScriptLog implements Comparable<ScriptLog> {
 
 	private int level;
 	private Object message;
@@ -23,14 +23,22 @@ public class ScriptLog {
 	}
 
 	public Date getDate() {
-		
+
 		return this.date;
 	}
 
 	@Override
 	public String toString() {
-		return "[" + this.date.toString() + "] (" + this.level + ") "
-				+ this.message == null ? "null" : this.message.toString();
+		return "[" + this.date.toString() + "] (" + this.level + ") " + this.message == null ? "null"
+				: this.message.toString();
+	}
+
+	@Override
+	public int compareTo(ScriptLog o) {
+		if (o == null)
+			return 1;
+		return -date.compareTo(o.date);
+
 	}
 
 }
