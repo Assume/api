@@ -23,6 +23,13 @@ import org.tribot.api2007.types.RSObjectDefinition;
 
 import scripts.CombatAIO.com.base.main.utils.Items07;
 import scripts.api.scriptapi.logging.Logger;
+import scripts.starfox.api2007.Inventory07;
+import scripts.starfox.api2007.Mouse07;
+import scripts.starfox.api2007.Player07;
+import scripts.starfox.api2007.entities.Entities;
+import scripts.starfox.api2007.entities.NPCs07;
+import scripts.starfox.api2007.entities.Objects07;
+import scripts.starfox.api2007.walking.Walking07;
 
 /**
  * The AntiBan class provides an easy way to implement Anti-ban Compliance 2.0
