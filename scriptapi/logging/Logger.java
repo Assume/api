@@ -57,15 +57,15 @@ public class Logger {
 	}
 
 	public String[] getAllLogsAsString(int level, int number) {
-		return (String[]) this.logs.stream().filter(a -> a != null && a.getLevel() >= level)
-				.sorted((a, b) -> a.getDate().compareTo(b.getDate())).limit(number).map(a -> a.toString()).toArray();
-		/*
-		 * List<String> temp = new ArrayList<String>(); for (int i =
-		 * this.logs.size() - 1; i >= 0 && temp.size() < number; i--) {
-		 * ScriptLog log = logs.get(i); if (log != null && log.getLevel() >=
-		 * level) temp.add(log.toString()); } return temp.toArray(new
-		 * String[temp.size()]);
-		 */
+		//return (String[]) this.logs.stream().filter(a -> a != null && a.getLevel() >= level)
+			//	.sorted((a, b) -> a.getDate().compareTo(b.getDate())).limit(number).map(a -> a.toString()).toArray();
+		
+		  List<String> temp = new ArrayList<String>(); for (int i =
+		  this.logs.size() - 1; i >= 0 && temp.size() < number; i--) {
+		  ScriptLog log = logs.get(i); if (log != null && log.getLevel() >=
+		  level) temp.add(log.toString()); } return temp.toArray(new
+		  String[temp.size()]);
+
 	}
 
 	public ScriptLog[] getAllLogs(int level, int number) {
