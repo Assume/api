@@ -9,16 +9,26 @@ import org.tribot.api.types.generic.Filter;
 import org.tribot.api.util.abc.ABCProperties;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api.util.abc.preferences.WalkingPreference;
-import org.tribot.api2007.*;
-import org.tribot.api2007.types.*;
+import org.tribot.api2007.Combat;
+import org.tribot.api2007.Game;
+import org.tribot.api2007.Options;
+import org.tribot.api2007.Player;
+import org.tribot.api2007.Walking;
+import org.tribot.api2007.types.RSCharacter;
+import org.tribot.api2007.types.RSItem;
+import org.tribot.api2007.types.RSNPC;
+import org.tribot.api2007.types.RSNPCDefinition;
+import org.tribot.api2007.types.RSObject;
+import org.tribot.api2007.types.RSObjectDefinition;
+
+import scripts.api.scriptapi.generic.Entities;
+import scripts.api.scriptapi.generic.Inventory07;
+import scripts.api.scriptapi.generic.Items07;
+import scripts.api.scriptapi.generic.Mouse07;
+import scripts.api.scriptapi.generic.NPCs07;
+import scripts.api.scriptapi.generic.Objects07;
+import scripts.api.scriptapi.generic.Player07;
 import scripts.api.scriptapi.logging.Logger;
-import scripts.starfox.api2007.Inventory07;
-import scripts.starfox.api2007.Mouse07;
-import scripts.starfox.api2007.Player07;
-import scripts.starfox.api2007.entities.Entities;
-import scripts.starfox.api2007.entities.Items07;
-import scripts.starfox.api2007.entities.NPCs07;
-import scripts.starfox.api2007.entities.Objects07;
 import scripts.starfox.api2007.walking.Walking07;
 
 /**
@@ -256,10 +266,10 @@ public final class AntiBan {
     public static void sleepReactionTime() {
         final int reaction_time = getReactionTime();
         if (print_debug) {
-            debug("Reaction time: " + reaction_time + "ms.");
+            debug("Reaction time: " + (reaction_time / 3) + "ms.");
         }
         try {
-            getABCUtil().sleep(reaction_time);
+            getABCUtil().sleep((reaction_time / 3));
         } catch (InterruptedException e) {
             debug("Background thread interrupted sleep");
         }
