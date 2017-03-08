@@ -28,8 +28,8 @@ import scripts.api.scriptapi.generic.Mouse07;
 import scripts.api.scriptapi.generic.NPCs07;
 import scripts.api.scriptapi.generic.Objects07;
 import scripts.api.scriptapi.generic.Player07;
+import scripts.api.scriptapi.generic.Walking07;
 import scripts.api.scriptapi.logging.Logger;
-import scripts.starfox.api2007.walking.Walking07;
 
 /**
  * The AntiBan class provides an easy way to implement Anti-ban Compliance 2.0
