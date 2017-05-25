@@ -23,7 +23,7 @@ public class Logger {
 
 	private int warning_level;
 
-	public static Logger logger;
+	private static Logger logger;
 
 	public static Logger getLogger() {
 		return logger == null ? logger = new Logger() : logger;
