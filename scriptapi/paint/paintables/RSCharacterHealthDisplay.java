@@ -57,7 +57,7 @@ public class RSCharacterHealthDisplay extends Paintable<RSCharacter> {
 		g.setColor(Color.WHITE);
 		g.drawString(super.get().getName(), super.x + 50, super.y + 11);
 
-		g.drawString(super.get().getHealth() + "/" + super.get().getMaxHealth(), super.x + 51, super.y + 25);
+		g.drawString("" + Math.round(super.get().getHealthPercent() * 100), super.x + 51, super.y + 25);
 
 	}
 
