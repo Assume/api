@@ -34,6 +34,10 @@ public abstract class Paintable<T> {
 
 	protected PaintHandler handler;
 
+	public Paintable(T t) {
+		this(t, -1,-1);
+	}
+	
 	public Paintable(int x, int y) {
 		this(null, x, y);
 	}
